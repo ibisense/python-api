@@ -126,7 +126,7 @@ class DataSet(Base):
             if isinstance(jsonObj['end'], (str, unicode)):
                 jsonObj['end'] = parser.parse(str(jsonObj['end']))
             elif type(jsonObj['end']) is  not datetime.datetime:
-                raise TypeError('end must be a datetime.datetime or a string, not %s' % type(start))
+                raise TypeError('end must be a datetime.datetime or a string, not %s' % type(end))
 
             self._data = jsonObj
         else:
