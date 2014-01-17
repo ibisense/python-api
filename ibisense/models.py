@@ -156,13 +156,15 @@ class DataSet(Base):
             }
 
     def toJson(self):
-        datapoints = self._data.datapoints
-        dataset = {}
-        dataset.datapoints = []
+        datapoints = self._data['datapoints']
+        dataset = {
+            'CUID': self._data['CUID'],
+            'start': self._data['start'].isoformat(),
+            'end': self._data['end'].isoformat(),
+            'summary': self._data['summary'],
+            'datapoints': []
+        }
+
         for dp in datapoints:
-            dataset.datapoints.append(dp.toJson())
-        dataset.CUID = self._data.CUID
-        dataset.start = self._data.start.isoformat()
-        dataset.end = self._data.end.isoformat()
-        dataset.summary = self._data.summary
+            dataset['datapoints'].append(dp.toJson())
         return json.dumps(dataset, encoding="utf-8")
