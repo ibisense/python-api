@@ -105,11 +105,10 @@ class DataPoint(Base):
             }
 
     def toJson(self):
-        #return super(Base, self).__getrep__()
-        datapoint = {'t': '', 'v': ''}
-        datapoint['t'] = self._data['t'].isoformat()
-        datapoint['v'] = self._data['v']
-        return datapoint
+        return datapoint = {
+            't': self._data['t'].isoformat(), 
+            'v': self._data['v']
+        }
 
 class DataSet(Base):
     def __init__(self, CUID, start, end, summary, datapoints, jsonObj = None):
