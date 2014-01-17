@@ -81,7 +81,7 @@ class DataPoint(Base):
                     jsonObj['t'] = parser.parse(str(jsonObj['t']))
                 except ValueError, e:
                     raise e
-            elif isinstance(jsonObj['t'], (float, int)):
+            elif isinstance(jsonObj['t'], (float, int, long)):
                 jsonObj['t'] = datetime.datetime.fromtimestamp(float(jsonObj['t']) / 1000)
             elif type(jsonObj['t']) is  not datetime.datetime:
                 raise TypeError('t must be a datetime.datetime or a string, not %s' % type(jsonObj['t']))
@@ -94,7 +94,7 @@ class DataPoint(Base):
                     t = parser.parse(str(t))
                 except ValueError, e:
                     raise e
-            elif isinstance(t, (float, int)):
+            elif isinstance(t, (float, int, long)):
                 t = datetime.datetime.fromtimestamp(float(t) / 1000)
             elif type(t) is  not datetime.datetime:
                 raise TypeError('t must be a datetime.datetime or a string, not %s' % type(t))
