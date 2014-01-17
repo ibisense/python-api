@@ -105,7 +105,7 @@ class DataPoint(Base):
             }
 
     def toJson(self):
-        return datapoint = {
+        return {
             't': self._data['t'].isoformat(), 
             'v': self._data['v']
         }
