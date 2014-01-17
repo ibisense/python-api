@@ -181,14 +181,14 @@ class DataPoints():
 		elif isinstance(start, (float, int)):
 			start = datetime.fromtimestamp(float(start))
 		elif type(start) is  not datetime.date:
-			raise TypeError('start must be a datetime.date or a string, not %s' % type(t))
+			raise TypeError('start must be a datetime.date or a string, not %s' % type(start))
 
 		if isinstance(end, (str, unicode)):
 			end = parser.parse(end)
 		elif isinstance(end, (float, int)):
 			end = datetime.fromtimestamp(float(end))
 		elif type(end) is not datetime.date:
-			raise TypeError('end must be a datetime.date or a string, not %s' % type(t))
+			raise TypeError('end must be a datetime.date or a string, not %s' % type(end))
 
 		params = {
 			'start': start.isoformat().encode("UTF-8"),
