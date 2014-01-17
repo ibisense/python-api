@@ -104,11 +104,14 @@ class DataPoint(Base):
                 'v': v
             }
 
-    def toJson(self):
+    def toDict(self):
         return {
             't': self._data['t'].isoformat(), 
             'v': self._data['v']
         }
+
+    def toJson(self):
+        return json.dumps(self.toDict(), encoding="utf-8")
 
 class DataSet(Base):
     def __init__(self, CUID, start, end, summary, datapoints, jsonObj = None):
@@ -155,15 +158,11 @@ class DataSet(Base):
             }
 
     def toJson(self):
-        datapoints = self._data['datapoints']
         dataset = {
             'CUID': self._data['CUID'],
             'start': self._data['start'].isoformat(),
             'end': self._data['end'].isoformat(),
             'summary': self._data['summary'],
-            'datapoints': []
+            'datapoints': [x.toDict() for x in self._data['datapoints']]
         }
-
-        for dp in datapoints:
-            dataset['datapoints'].append(dp.toJson())
         return json.dumps(dataset, encoding="utf-8")
