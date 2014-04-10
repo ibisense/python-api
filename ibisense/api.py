@@ -3,7 +3,7 @@ __version__ = '0.0.1'
 
 import requests
 import urllib
-import json
+import simplejson as json
 
 from dateutil import parser
 from datetime import date, datetime
@@ -220,10 +220,9 @@ class DataPoints():
 			raise ValueError('API key must be set')
 
 		api_url = api_base_url + "add/" + api_key + "/channel/id/" + cuid + "/data/"
-
 		r_dps = []
 		for datapoint in datapoints:
-			r_dps.append(datapoint.toJson())
+			r_dps.append(datapoint.toDict())
 		r = requests.post(api_url, headers = {'content-type': 'application/json'}, data = json.dumps(r_dps, encoding="utf-8"))
 		print json.dumps(r_dps, encoding="utf-8")
 		r.raise_for_status()
